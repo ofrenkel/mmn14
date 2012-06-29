@@ -1,19 +1,17 @@
-#define TRUE 1
-#define FALSE 0
-typedef int boolean;
+typedef enum { FALSE, TRUE } boolean;
 
 typedef struct {
 	char *name;
 	int addr;
 	boolean is_data; 
-} Label;
+} label;
 
 typedef char word[2];
 
-enum addressing_type { IMMIDIATE, DIRECT, RELATIVE, REGISTER };
+typedef enum { IMMEDIATE, DIRECT, RELATIVE, REGISTER } addressing;
 
 typedef struct {
-	addressing_type at;
+	addressing at;
 	word value;
 } argument;
 

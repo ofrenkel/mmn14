@@ -7,5 +7,6 @@ Debug
 .autotools
 .cproject
 .project
+.settings
 sh.exe.stackdump
 ssh-agent.exe.stackdump
