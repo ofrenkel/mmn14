@@ -4,3 +4,8 @@ mmn14.suo
 mmn14.vcproj
 mmn14.vcproj.MOSQUITO-LAPTOP.Frenkel.user
 Debug
+.autotools
+.cproject
+.project
+sh.exe.stackdump
+ssh-agent.exe.stackdump
