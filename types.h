@@ -3,7 +3,8 @@ typedef enum { FALSE, TRUE } boolean;
 typedef struct {
 	char *name;
 	int addr;
-	boolean is_data; 
+	boolean is_data;
+	int source_line;
 } label;
 
 typedef char word[2];
