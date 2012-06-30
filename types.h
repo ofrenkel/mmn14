@@ -1,39 +1,56 @@
+#ifndef TYPES_H
+#define TYPES_H
+
+#define LABEL_NAME_SIZE 30
+
 typedef enum { FALSE, TRUE } boolean;
 
-typedef struct {
-	char *name;
-	int addr;
-	boolean is_data;
-	int source_line;
-} label;
-
+/* enum for label types: regular, extern or entry */
+typedef enum { REGULAR, EXTERN, ENTRY } label_type;
 typedef char word[2];
 
-typedef enum { IMMEDIATE, DIRECT, RELATIVE, REGISTER } addressing;
+/* Addressing type of an argument. */
+typedef enum { IMMEDIATE, DIRECT, RELATIVE=3, REGISTER } addressing;
 
+/* Argument of a command. */
 typedef struct {
-	addressing at;
+	/* Argument addressing type */
+addressing atype;
+
+	/* Argument value */
 	word value;
+
+	/* Save [a]bsolute, [r]elative, or [e]xternal for the linker */
+	char link_directive;
 } argument;
 
-struct {
-	char* name;
+/* Struct to represent a label of a line. */
+typedef struct {
+	char name[LABEL_NAME_SIZE];
+	int addr;
+	boolean is_data;
+	label_type ltype;
+} label;
+
+/* A reference to a label from a command. */
+typedef struct {
+	char name[LABEL_NAME_SIZE];
+	int source_line;
+	int addr;
+	argument *arg;
+} label_ref;
+
+/* Entry definition for a label defined as entry. */
+typedef struct {
+	char name[LABEL_NAME_SIZE];
+	int source_line;
+	int addr;
+} label_entry;
+
+typedef struct {
 	int code;
-} commands[] = {
-	{"mov", 0 },
-	{"cmp", 1 },
-	{"add", 2 },
-	{"sub", 3 },
-	{"ror", 4 },
-	{"shr", 5 },
-	{"lea", 6 },
-	{"inc", 7 },
-	{"dec", 10 },
-	{"jmp", 11 },
-	{"bne", 12 },
-	{"red", 13 },
-	{"prn", 14 },
-	{"jsr", 15 },
-	{"rts", 16 },
-	{"hlt", 17 } 
-};
+	argument args[2];
+} command;
+
+
+#endif /* TYPES-H */
